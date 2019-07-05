@@ -1,0 +1,58 @@
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  aop:
+    proxy-target-class: true
+sharding:
+  jdbc:
+    datasource:
+      ds0:
+        password: root
+        jdbc-url: jdbc:mysql://192.168.0.120:3306/ds0?characterEncoding=utf-8
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+      ds1:
+        jdbc-url: jdbc:mysql://192.168.0.120:3306/ds1?characterEncoding=utf-8
+        password: root
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+      names: ds0,ds1
+    config:
+      sharding:
+        tables:
+          user:
+            table-strategy:
+              inline:
+                sharding-column: age
+                algorithm-expression: user_$->{age % 2}
+            actual-data-nodes: ds$->{0..1}.user_$->{0..1}
+          order:
+            key-generator:
+              column: id
+              type: LEAF #UUID,LEAF,SNOWFLAKE
+            table-strategy:
+              inline:
+                sharding-column: id
+                algorithm-expression: order_$->{id % 2}
+            actual-data-nodes: ds$->{0..1}.order_$->{0..1}
+        default-database-strategy:
+          inline:
+            sharding-column: id
+            algorithm-expression: ds$->{id % 2}
+        encryptRule:
+          encryptors:
+            order_encryptor:
+              qualifiedColumns: order.pass
+              type: AES
+              props:
+                aes.key.value: 147258
+      props:
+        sql:
+          show: true
+
+#logging:
+#  level:
+#    root: debug

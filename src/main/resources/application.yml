@@ -1,0 +1,86 @@
+spring:
+  shardingsphere:
+#    encrypt:
+#      encryptors:
+#        pass_encryptor:
+#          type: aes
+#          qualifiedColumns: order.pass
+#          props:
+#            aes.key.value: 11
+#    encryptRule:
+#      encryptors:
+#        order_encryptor:
+#          type: aes
+#          qualifiedColumns: order.pass
+#          props:
+#            aes.key.value: 123456
+    datasource:
+      ds0:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.2.120:3360/ds0?characterEncoding=utf-8
+        password: root
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+      ds1:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.2.120:3360/ds1?characterEncoding=utf-8
+        password: root
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+      names: ds0,ds1
+    sharding:
+      encryptRule:
+        encryptors:
+          order1_encryptor:
+            qualifiedColumns: order.pass
+            type: MD5  #MD5  AES
+#            props:
+#              aes:
+#                key:
+#                  value: 123456
+          order2_encryptor:
+            qualifiedColumns: order.name
+            type: AES  #MD5  AES
+            props:
+              aes:
+                key:
+                  value: 123456
+      default-database-strategy:
+        inline:
+          algorithm-expression: ds$->{id % 2}
+          sharding-column: id
+      tables:
+        order:
+          actual-data-nodes: ds$->{0..1}.order_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: order_$->{id % 2}
+          key-generator:
+            column: id
+            props:
+              worker:
+                id: 123
+            type: SNOWFLAKE
+        user:
+          actual-data-nodes: ds$->{0..1}.user_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: age
+              algorithm-expression: user_$->{age % 2}
+
+    props:
+      sql:
+       show: true
+
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8081
+#logging:
+  ##  level:
+  ##    root: debug
+
+
+
+
