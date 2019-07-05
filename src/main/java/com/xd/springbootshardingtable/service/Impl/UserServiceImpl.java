@@ -1,6 +1,5 @@
 package com.xd.springbootshardingtable.service.Impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xd.springbootshardingtable.entity.User;

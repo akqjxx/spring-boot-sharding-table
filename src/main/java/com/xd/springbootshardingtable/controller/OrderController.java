@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @Classname UserController
- * @Description 用户测试控制类
- * @Author 李号东 lihaodongmail@163.com
- * @Date 2019-05-26 17:36
- * @Version 1.0
+ *
  */
 @RestController
-@RequestMapping(value ="/order" )
+@RequestMapping(value = "/order")
 public class OrderController {
 
     @Autowired

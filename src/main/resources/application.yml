@@ -56,6 +56,10 @@ spring:
             inline:
               sharding-column: id
               algorithm-expression: order_$->{id % 2}
+#          databaseStrategy:
+#            inline:
+#              shardingColumn: id
+#              algorithmInlineExpression: ds${id % 2}
           key-generator:
             column: id
             props:
@@ -68,13 +72,35 @@ spring:
             inline:
               sharding-column: age
               algorithm-expression: user_$->{age % 2}
-
+#          databaseStrategy:
+#            inline:
+#              shardingColumn: id
+#              algorithmInlineExpression: ds${id % 2}
+        student:
+          actual-data-nodes: ds$->{0..1}.student_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: score
+              algorithm-expression: student_$->{score % 2}
+#          databaseStrategy:
+#            inline:
+#              shardingColumn: score
+#              algorithmInlineExpression: ds${score % 2}
+          key-generator:
+            column: id
+            props:
+              worker:
+                id: 456
+            type: UUID  #UUID,LEAF,SNOWFLAKE
+      broadcast-tables: log
     props:
       sql:
        show: true
-
   main:
     allow-bean-definition-overriding: true
+  output:
+    ansi:
+      enabled: always
 server:
   port: 8081
 #logging:

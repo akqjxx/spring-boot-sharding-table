@@ -9,11 +9,10 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("order")
-public class Order extends Model<Order> implements java.io.Serializable {
-    private static final long serialVersionUID = -7501493103131571532L;
+@TableName("log")
+public class Log extends Model<Log> implements java.io.Serializable {
 
-    private Long id;
-    private String name;
-    private String pass;
+    private static final long serialVersionUID = 7193414055649287290L;
+
+    private String str;
 }

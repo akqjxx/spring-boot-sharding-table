@@ -248,7 +248,6 @@ SET FOREIGN_KEY_CHECKS =
 1
 ;
 
-
 create table order_0(
  id bigint primary key not null,
  name varchar(128),
@@ -259,4 +258,23 @@ create table order_1(
  id bigint primary key not null,
  name varchar(128),
  pass varchar(128)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table log(
+   str varchar(256)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+create table student_0(
+	id bigint primary key not null,
+	name varchar(128),
+	score int
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+create table student_1(
+	id bigint primary key not null,
+	name varchar(128),
+	score int
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

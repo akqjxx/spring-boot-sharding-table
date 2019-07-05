@@ -10,6 +10,9 @@ public class SpringBootShardingTableApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootShardingTableApplication.class, args);
+         Runtime.getRuntime().addShutdownHook(new Thread(()->{
+             System.out.println("*************项目停止运行*************");
+         }));
     }
 
 }
