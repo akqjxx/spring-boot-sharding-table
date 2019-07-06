@@ -18,7 +18,7 @@ public class LogServiceImpl  extends ServiceImpl<LogMapper, Log>
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Log> getUserList() {
-        return baseMapper.selectList(Wrappers.<Log>lambdaQuery());
+        return baseMapper.selectList(Wrappers.lambdaQuery());
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

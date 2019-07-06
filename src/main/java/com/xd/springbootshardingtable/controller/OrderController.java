@@ -1,8 +1,6 @@
 package com.xd.springbootshardingtable.controller;
 
 import com.xd.springbootshardingtable.entity.Order;
-import com.xd.springbootshardingtable.entity.User;
-import com.xd.springbootshardingtable.service.UserService;
 import com.xd.springbootshardingtable.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
