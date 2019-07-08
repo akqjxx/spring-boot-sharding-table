@@ -76,7 +76,7 @@ spring:
 #            inline:
 #              shardingColumn: id
 #              algorithmInlineExpression: ds${id % 2}
-        student:
+        student:  
           actual-data-nodes: ds$->{0..1}.student_$->{0..1}
           table-strategy:
             inline:
