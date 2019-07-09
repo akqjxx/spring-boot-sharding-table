@@ -1,4 +1,5 @@
 https://github.com/apache/incubator-shardingsphere-example
+https://github.com/LiHaodong888/SpringBootLearn
 
 CREATE DATABASE IF NOT EXISTS
 `ds0`
@@ -41,7 +42,7 @@ CREATE TABLE
 
 `id`
 
-int
+bigint
 (
 11
 ) NOT NULL,

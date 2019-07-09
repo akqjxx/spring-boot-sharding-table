@@ -21,6 +21,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order>
         return baseMapper.selectList(Wrappers.<Order>lambdaQuery());
     }
 
+    // @Sharding
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
     public boolean save(Order entity) {

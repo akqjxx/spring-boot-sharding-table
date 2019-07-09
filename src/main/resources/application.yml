@@ -17,13 +17,13 @@ spring:
     datasource:
       ds0:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.2.120:3360/ds0?characterEncoding=utf-8
+        jdbc-url: jdbc:mysql://192.168.0.120:3306/ds0?characterEncoding=utf-8
         password: root
         type: com.zaxxer.hikari.HikariDataSource
         username: root
       ds1:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://192.168.2.120:3360/ds1?characterEncoding=utf-8
+        jdbc-url: jdbc:mysql://192.168.0.120:3306/ds1?characterEncoding=utf-8
         password: root
         type: com.zaxxer.hikari.HikariDataSource
         username: root
@@ -96,6 +96,13 @@ spring:
     props:
       sql:
        show: true
+    orchestration:
+      name: zk-sharding
+      overwrite: false
+      registry:
+        namespace: orchestration-spring-boot-sharding-pm
+        server-lists: zookeeper://192.168.0.120:2181
+        type: zookeeper
   main:
     allow-bean-definition-overriding: true
   output:
